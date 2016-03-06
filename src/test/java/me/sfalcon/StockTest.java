@@ -9,6 +9,7 @@ public class StockTest
 {
 
     static final Stock stock = new Stock(5, 100);
+    static final Stock zeroStock = new Stock();
 
     public StockTest( String testName )
     {
@@ -20,9 +21,13 @@ public class StockTest
         return new TestSuite( StockTest.class );
     }
 
-    public void testDividend()
-    {
-
+    public void testDividend() {
+        assertEquals( zeroStock.dividendYield(), 0.0);
         assertEquals( stock.dividendYield(), 0.05 );
+    }
+
+    public void testPriceEarningRatio(){
+        assertEquals( zeroStock.priceEarningRatio(), 0.0);
+        assertEquals( stock.priceEarningRatio(), 20.0);
     }
 }

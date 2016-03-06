@@ -20,4 +20,9 @@ public class Stock {
         return lastDividend/tickerPrice;
     }
 
+    public double priceEarningRatio(){
+        if (lastDividend == 0) return lastDividend;
+        return tickerPrice/lastDividend;
+    }
+
 }

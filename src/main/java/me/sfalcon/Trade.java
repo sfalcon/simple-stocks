@@ -2,8 +2,6 @@ package me.sfalcon;
 
 import java.time.ZonedDateTime;
 import java.time.temporal.ChronoUnit;
-import java.util.IllegalFormatCodePointException;
-import java.util.function.Predicate;
 
 /**
  * Created by sfalcon on 3/6/2016.

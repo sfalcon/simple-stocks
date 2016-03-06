@@ -1,17 +1,15 @@
 package me.sfalcon;
 
-import java.time.ZonedDateTime;
-import java.time.temporal.ChronoUnit;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Stack;
-import java.util.function.Consumer;
-import java.util.function.Predicate;
 
 /**
  * Created by sfalcon on 3/6/2016.
  */
 public class Stock {
+
+    protected String symbol;
 
     protected double lastDividend = 0;
     protected double tickerPrice = 0;
@@ -80,6 +78,13 @@ public class Stock {
         this.parValue = parValue;
     }
 
+    public String getSymbol() {
+        return symbol;
+    }
+
+    public void setSymbol(String symbol) {
+        this.symbol = symbol;
+    }
 
     public static double geometricMean(List<Stock> stocks) {
 

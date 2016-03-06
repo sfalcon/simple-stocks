@@ -1,7 +1,9 @@
 package me.sfalcon;
 
 import java.time.ZonedDateTime;
+import java.time.temporal.ChronoUnit;
 import java.util.IllegalFormatCodePointException;
+import java.util.function.Predicate;
 
 /**
  * Created by sfalcon on 3/6/2016.
@@ -21,6 +23,11 @@ public class Trade {
         this.setShares(shares);
         this.indicator = indicator;
         this.setPrice(price);
+    }
+
+    public boolean madeWithinLast15Min(){
+        ZonedDateTime fifteenMinAgo =  ZonedDateTime.now().minus(15, ChronoUnit.MINUTES);
+        return this.timestamp.isAfter(fifteenMinAgo);
     }
 
     public ZonedDateTime getTimestamp() {

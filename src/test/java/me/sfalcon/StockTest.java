@@ -5,6 +5,7 @@ import junit.framework.TestCase;
 import junit.framework.TestSuite;
 import java.time.ZonedDateTime;
 import java.time.temporal.ChronoUnit;
+import java.util.function.UnaryOperator;
 
 import static me.sfalcon.Indicator.*;
 
@@ -15,6 +16,10 @@ public class StockTest
 
     static Stock stock = null;
     static final Stock zeroStock = new Stock();
+    UnaryOperator<Double> round = (d) -> {
+        double val = d*100;
+        return  Math.ceil(val)/100;
+    };
 
     public StockTest( String testName )
     {
@@ -55,7 +60,17 @@ public class StockTest
         ZonedDateTime tenMinAgo = now.minus(10, ChronoUnit.MINUTES);
         ZonedDateTime twentyMinAgo = now.minus(20, ChronoUnit.MINUTES);
 
-        Trade first = new Trade(now, 3, BUY, 300);
+        stock.trade(new Trade(twentyMinAgo, 3, SELL, 110));
+        stock.trade(new Trade(tenMinAgo, 2, BUY, 105));
+        stock.trade(new Trade(fiveMinAgo, 1, SELL, 100));
+        stock.trade(new Trade(now, 4, BUY, 98));
+
+        assertEquals(100.29, round.apply(stock.price()));
+    }
+
+    public void geometricMean(){
+
+
     }
 
 }

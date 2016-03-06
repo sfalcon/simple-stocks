@@ -1,6 +1,11 @@
 package me.sfalcon;
 
+import java.time.ZonedDateTime;
+import java.time.temporal.ChronoUnit;
+import java.util.Iterator;
 import java.util.Stack;
+import java.util.function.Consumer;
+import java.util.function.Predicate;
 
 /**
  * Created by sfalcon on 3/6/2016.
@@ -34,6 +39,20 @@ public class Stock {
     public void trade(Trade trade){
         this.tickerPrice = trade.getPrice();
         this.trades.push(trade);
+    }
+
+    public double price(){
+        double sumPrice = 0;
+        double sumQuantity = 0;
+        for (Iterator<Trade> iterator = trades.iterator(); iterator.hasNext(); ) {
+            Trade next =  iterator.next();
+            if (next.madeWithinLast15Min()){
+                sumPrice += next.getPrice() * next.getShares();
+                sumQuantity += next.getShares();
+            }
+        }
+
+        return sumPrice/sumQuantity;
     }
 
     public double getTickerPrice() {

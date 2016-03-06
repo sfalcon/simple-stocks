@@ -5,6 +5,7 @@ import junit.framework.TestCase;
 import junit.framework.TestSuite;
 
 import java.time.ZonedDateTime;
+import java.time.temporal.ChronoUnit;
 
 import static me.sfalcon.Indicator.*;
 
@@ -46,6 +47,14 @@ public class TradeTest
         assertTrue(negatives.hasThrownError(IllegalArgumentException.class));
         negatives = new ExceptionAssertion(()-> trade.setPrice(0));
         assertTrue(negatives.hasThrownError(IllegalArgumentException.class));
+    }
+
+    public void testMadeWithinLast15min(){
+        Trade trade = new Trade();
+        trade.setTimestamp(ZonedDateTime.now().minus(5, ChronoUnit.MINUTES));
+        assertTrue(trade.madeWithinLast15Min());
+        trade.setTimestamp(ZonedDateTime.now().minus(15, ChronoUnit.MINUTES));
+        assertFalse(trade.madeWithinLast15Min());
     }
 
 }

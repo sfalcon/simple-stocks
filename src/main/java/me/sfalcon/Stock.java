@@ -13,9 +13,9 @@ import java.util.function.Predicate;
  */
 public class Stock {
 
-    private double lastDividend = 0;
-    private double tickerPrice = 0;
-    private double parValue = 0;
+    protected double lastDividend = 0;
+    protected double tickerPrice = 0;
+    protected double parValue = 0;
 
     private Stack<Trade> trades = new Stack<>();
 

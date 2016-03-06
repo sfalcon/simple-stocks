@@ -6,7 +6,6 @@ import junit.framework.TestSuite;
 import java.time.ZonedDateTime;
 import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
-import java.util.LinkedList;
 import java.util.List;
 import java.util.function.UnaryOperator;
 
@@ -37,6 +36,10 @@ public class StockTest
         stock = new Stock(5, 100);
         assertEquals( 0.0, zeroStock.dividendYield());
         assertEquals( 0.05, stock.dividendYield());
+
+        stock = new FixedStock(8, 2, 100);
+        assertNotSame(0.08, stock.dividendYield());
+        assertEquals(2.0, stock.dividendYield()); //assert its using the preferred formula for fixed dividend stock
     }
 
     public void testPriceEarningRatio(){
@@ -75,7 +78,7 @@ public class StockTest
         List<Stock> stocks = new ArrayList<>();
         stocks.add(new Stock(8, 100));
         stocks.add(new Stock(23, 60));
-        stocks.add(new Stock(11, 100));
+        stocks.add(new FixedStock(11, 2, 100));
         stocks.add(new Stock(13, 250));
 
         assertEquals(110.67, round.apply(Stock.geometricMean(stocks)));

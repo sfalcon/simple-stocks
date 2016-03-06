@@ -3,6 +3,7 @@ package me.sfalcon;
 import java.time.ZonedDateTime;
 import java.time.temporal.ChronoUnit;
 import java.util.Iterator;
+import java.util.List;
 import java.util.Stack;
 import java.util.function.Consumer;
 import java.util.function.Predicate;
@@ -77,5 +78,21 @@ public class Stock {
 
     public void setParValue(double parValue) {
         this.parValue = parValue;
+    }
+
+
+    public static double geometricMean(List<Stock> stocks) {
+
+        double price = 0;
+        for (Iterator<Stock> iterator = stocks.iterator(); iterator.hasNext(); ) {
+            Stock next =  iterator.next();
+            if (price == 0){
+                price = next.getTickerPrice();
+            }else {
+                price *= next.getTickerPrice();
+            }
+        }
+
+        return Math.pow(Math.E, Math.log(price)/stocks.size());
     }
 }

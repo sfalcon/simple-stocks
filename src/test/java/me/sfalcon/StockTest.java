@@ -5,6 +5,9 @@ import junit.framework.TestCase;
 import junit.framework.TestSuite;
 import java.time.ZonedDateTime;
 import java.time.temporal.ChronoUnit;
+import java.util.ArrayList;
+import java.util.LinkedList;
+import java.util.List;
 import java.util.function.UnaryOperator;
 
 import static me.sfalcon.Indicator.*;
@@ -68,9 +71,14 @@ public class StockTest
         assertEquals(100.29, round.apply(stock.price()));
     }
 
-    public void geometricMean(){
+    public void testGeometricMean(){
+        List<Stock> stocks = new ArrayList<>();
+        stocks.add(new Stock(8, 100));
+        stocks.add(new Stock(23, 60));
+        stocks.add(new Stock(11, 100));
+        stocks.add(new Stock(13, 250));
 
-
+        assertEquals(110.67, round.apply(Stock.geometricMean(stocks)));
     }
 
 }
